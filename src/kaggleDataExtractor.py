@@ -1,5 +1,5 @@
 import os
-import Statistics
+# import Statistics
 output_dir = "results"
 
 def is_valid_chord(chord):
@@ -40,7 +40,7 @@ def get_cleaned_chord_name(chord):
 		return normalize_chord_name(chord)
 
 def extract_chords_info(f, file_name):
-	output_file = open(output_dir+"/"+str (file_name)+".txt", 'w')
+	output_file = open(output_dir+"/"+str (file_name)+".txt", 'w', encoding='ascii')
 	for line in f.readlines():
 		strs = line.split('\t')
 		chord = strs[-1].strip()
@@ -49,7 +49,7 @@ def extract_chords_info(f, file_name):
 	
 		if not chord == None:
 			# print chord
-			output_file.write(str (chord) + " ")
+			output_file.write((str (chord)).strip() + " ")
 
 def main():
 	path="Dataset/kaggle/annotations"
@@ -62,7 +62,7 @@ def main():
 			for file in os.listdir(path+"/"+directory):
 				f = open(path+"/"+directory+"/"+file, 'r')
 				extract_chords_info(f, output_file_name)
-				break
+				# break
 		output_file_name += 1
 
 	print ("=====> [INFO] CHORD EXTRACTION COMPLETE... <====")
@@ -77,5 +77,5 @@ def test_normalize():
 
 if __name__=="__main__":
 	main()
-	Statistics.GenerateStatistics()
+	# Statistics.GenerateStatistics()
 	# test_normalize()
