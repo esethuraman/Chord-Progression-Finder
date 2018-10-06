@@ -42,9 +42,9 @@ def evaluationFunction(inputList,keyNote):
             RankedOutput.remove(eachList)
 
     if len(RankedOutput) <= 5:
-        return RankedOutput
+        return [i[0] for i in RankedOutput]
     else:
-        return RankedOutput[:5]
+        return [i[0] for i in RankedOutput[:5]]
 
 def cleanup_results(cleanOutput, inputList):
     indexToBeDeleted = []
@@ -91,5 +91,5 @@ def remove_duplicate_chords(tuple_list):
     return result_tuple_lst
 
 
-a = evaluationFunction(['Am','Dm'], 'C')
+a = evaluationFunction(['Am','F','C'], 'C')
 print (a)
