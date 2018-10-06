@@ -1,9 +1,7 @@
-#def calculateRank():
 
-
-def evaluationFunction(inputList, keyNote):
+def evaluationFunction(inputList,keyNote):
     lengthOfInput = len(inputList)
-
+    nextNoteSeqValues = {}
     indexFile = get_Ngram_FileName(lengthOfInput)
     file_contents = open(indexFile, 'r', encoding='utf-8')
     ngramDict = eval(file_contents.read())
@@ -12,7 +10,15 @@ def evaluationFunction(inputList, keyNote):
     if inputString in ngramDict.keys():
         nextNoteSeqValues = (ngramDict[inputString])
 
+    else:
+        indexFile = get_Ngram_FileName(2)
+        file_contents = open(indexFile, 'r', encoding='utf-8')
+        ngramDict = eval(file_contents.read())
+        inputString = ' '.join(inputList)
+        if inputString in ngramDict.keys():
+            nextNoteSeqValues = (ngramDict[inputString])
     scoreSeqDict = {}
+
     for key, innerDict in nextNoteSeqValues.items():
         score = 1
         if key == keyNote:
@@ -35,7 +41,11 @@ def evaluationFunction(inputList, keyNote):
         if eachList == ('',''):
             RankedOutput.remove(eachList)
 
-    print(RankedOutput)
+    if len(RankedOutput) <= 5:
+        return RankedOutput
+    else:
+        return RankedOutput[:5]
+
 def cleanup_results(cleanOutput, inputList):
     indexToBeDeleted = []
     index =0
@@ -79,5 +89,7 @@ def remove_duplicate_chords(tuple_list):
         chords_as_str = ' '.join(result_chords)
         result_tuple_lst.append((chords_as_str, tupl[1]))
     return result_tuple_lst
-if __name__ == "__main__":
-    evaluationFunction(['C', 'F'], 'C')
+
+
+a = evaluationFunction(['Am','Dm'], 'C')
+print (a)

@@ -1,5 +1,6 @@
 import os
 import Statistics
+import EvaluationFunction
 output_dir = "results"
 
 def is_valid_chord(chord):
@@ -78,4 +79,4 @@ def test_normalize():
 if __name__=="__main__":
 	main()
 	Statistics.GenerateStatistics()
-	# test_normalize()
+	#print (EvaluationFunction.evaluationFunction(['Am','Dm'], 'C'))
