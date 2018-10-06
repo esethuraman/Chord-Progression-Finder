@@ -1,5 +1,5 @@
 import os
-
+import Statistics
 output_dir = "results"
 
 def is_valid_chord(chord):
@@ -55,7 +55,7 @@ def main():
 	path="Dataset/kaggle/annotations"
 	output_file_name = 1
 
-	print "=====> [INFO] CHORD EXTRACTION STARTED... <===="
+	print ("=====> [INFO] CHORD EXTRACTION STARTED... <====")
 
 	for directory in os.listdir(path):
 		if not directory.startswith("."):
@@ -65,7 +65,7 @@ def main():
 				break
 		output_file_name += 1
 
-	print "=====> [INFO] CHORD EXTRACTION COMPLETE... <===="
+	print ("=====> [INFO] CHORD EXTRACTION COMPLETE... <====")
 
 def test_normalize():
 	normalize_chord_name("A:maj")
@@ -77,4 +77,5 @@ def test_normalize():
 
 if __name__=="__main__":
 	main()
+	Statistics.GenerateStatistics()
 	# test_normalize()
