@@ -27,6 +27,18 @@ def build_master_index():
         construct_dict1(bigrams, 2, keyNote)
         construct_dict1(trigrams, 3, keyNote)
         construct_dict1(quadgrams, 4, keyNote)
+    newFile = open("unigrams.txt", 'w', encoding='utf-8')
+    newFile.write(str(unigram_dict))
+    newFile.close()
+    newFile = open("bigrams.txt", 'w', encoding='utf-8')
+    newFile.write(str(bigram_dict))
+    newFile.close()
+    newFile = open("trigrams.txt", 'w', encoding='utf-8')
+    newFile.write(str(trigram_dict))
+    newFile.close()
+    newFile = open("quadgrams.txt", 'w', encoding='utf-8')
+    newFile.write(str(quadgram_dict))
+    newFile.close()
 
 def write_into_result_index(output_dict, key_string, value_string, scale):
     if key_string in output_dict.keys():
@@ -56,8 +68,10 @@ def get_dict_name(n):
 def construct_dict1 (tokenList, n, keyNote):
     for indx in range(len(tokenList)):
         if not (indx == len(tokenList) - 1):
+            if (indx + n) >= len(tokenList) :
+                continue
             key = tokenList[indx]
-            value = tokenList[indx + 1]
+            value = tokenList[indx + n]
         else:
             key = tokenList[indx]
             value = tokenList[0]
@@ -66,18 +80,6 @@ def construct_dict1 (tokenList, n, keyNote):
         value = ' '.join(value)
         write_into_result_index(get_dict_name(n), key, value, keyNote)
 
-    newFile = open("unigrams.txt", 'w', encoding='utf-8')
-    newFile.write(str(unigram_dict))
-    newFile.close()
-    newFile = open("bigrams.txt", 'w', encoding='utf-8')
-    newFile.write(str(bigram_dict))
-    newFile.close()
-    newFile = open("trigrams.txt", 'w', encoding='utf-8')
-    newFile.write(str(trigram_dict))
-    newFile.close()
-    newFile = open("quadgrams.txt", 'w', encoding='utf-8')
-    newFile.write(str(quadgram_dict))
-    newFile.close()
 
 def ngrams(input, n):
     output = []
